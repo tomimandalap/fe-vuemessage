@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/Rubik-font/Rubik-Regular.ttf');
+}
+
+body {
+  background: #FAFAFA;
+}
+
+.tx-none:hover {
+  text-decoration: none;
+}
+
+.font-rubik {
+  font-family: 'Rubik';
+}
+
+.colorLabel {
+  color: #848484;
+}
+
+.cf-white {
+  color: #fff;
+}
+
+.cf-second {
+  color: #7E98DF
+}
+
+.btn-custom {
+  background: #7E98DF;
+  border-radius: 50px;
+  border: none;
+}
+
+.btn-outcustom {
+  background: none;
+  border-radius: 50px;
+  border: 1px solid #7E98DF;
+}
+
+input.inputBorder {
+  border-top: 0px solid black;
+  border-left: 0px solid black;
+  border-right: 0px solid black;
+  border-bottom: 1px solid #232323;
+}

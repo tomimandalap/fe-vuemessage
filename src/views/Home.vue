@@ -1,18 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <h3>Room ID : {{ roomID }}</h3>
+    <h3>Name : {{ userName }}</h3>
+    <h3>ID : {{ userID }}</h3>
+    <h3>token: {{ token }}</h3>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+// import io from 'socket.io-client'
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  computed: {
+    ...mapGetters({
+      roomID: 'users/getRoomID',
+      userName: 'users/getName',
+      userID: 'users/getIDUser',
+      token: 'users/getToken'
+    })
   }
 }
 </script>
