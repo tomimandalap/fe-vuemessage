@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 const mixins = {
   data () {
     return {
+      webURL: process.env.VUE_APP_WEBURL,
       formRegister: {
         name: '',
         email: '',
@@ -13,6 +14,11 @@ const mixins = {
       },
       formForgot: {
         email: ''
+      },
+      formUser: {
+        name: '',
+        email: '',
+        image: ''
       },
       Toast: Swal.mixin({
         toast: true,

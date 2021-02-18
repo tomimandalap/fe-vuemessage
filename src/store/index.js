@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state () {
     return {
-      staticURL: 'http://localhost:4000'
+      staticURL: process.env.VUE_APP_URL
     }
   },
   getters: {

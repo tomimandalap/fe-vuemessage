@@ -5,6 +5,8 @@
 
 body {
   background: #FAFAFA;
+  /* background: #ccc; */
+  overflow: hidden;
 }
 
 .tx-none:hover {
@@ -13,6 +15,19 @@ body {
 
 .font-rubik {
   font-family: 'Rubik';
+}
+
+.f-size {
+  font-size: 12px;
+}
+
+.f-icon {
+  font-size: 35px;
+}
+
+.f-icon-chat {
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .colorLabel {
@@ -25,6 +40,48 @@ body {
 
 .cf-second {
   color: #7E98DF
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.bg-second {
+  background: #FAFAFA;
+}
+
+.bg-custom {
+  background: #eee;
+}
+
+.bg-you {
+  background: #7E98DF;
+  padding: 20px 20px;
+  text-align: justify;
+}
+
+.border-none {
+  border: none;
+}
+
+.border-style {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.border-custom {
+  border: none;
+  border-radius: 20px;
+}
+
+/* .b-bottom {
+  border-bottom: 1px solid #848484;
+} */
+
+.input-border {
+  border: none;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .btn-custom {
@@ -44,4 +101,35 @@ input.inputBorder {
   border-left: 0px solid black;
   border-right: 0px solid black;
   border-bottom: 1px solid #232323;
+}
+
+.img-profile {
+  width: 80px;
+  height: 80px;
+  border: 1px solid#848484;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.img-profile-list {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+}
+
+.notif {
+  width: 18px;
+  height: 18px;
+  padding: 4px 4px;
+  font-size: 8px;
+  background: #7E98DF;
+  border-radius: 50%;
+}
+
+.t-blank {
+  position: relative;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

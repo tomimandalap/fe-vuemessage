@@ -74,18 +74,19 @@ export default {
       loginUsers: 'users/loginUsers'
     }),
     btnLogin () {
-      this.swalLoading('Login')
+      // this.swalLoading('Login')
       this.loginUsers(this.formLogin).then((response) => {
-        if (response === 'Email not found!') {
+        // console.log(response)
+        if (response.msg === 'Email not found!') {
           this.swalLoadingClose()
-          this.alertModif('warning', response)
-        } else if (response === 'Login failed, password wrong!') {
+          this.alertModif('warning', response.msg)
+        } else if (response.msg === 'Login failed, password wrong!') {
           this.swalLoadingClose()
-          this.alertModif('info', response)
+          this.alertModif('info', response.msg)
         } else {
           this.swalLoadingClose()
-          this.alertModif('success', response)
-          this.$router.push('/')
+          this.alertModif('success', response.msg)
+          this.$router.push(`/chat/${response.data.room_id}`)
         }
       }).catch((err) => {
         this.swalLoadingClose()
@@ -104,6 +105,7 @@ section.box-body {
   height: 730px;
   background: #fff;
   margin: 80px 0;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

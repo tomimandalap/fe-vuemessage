@@ -41,6 +41,7 @@ export default {
     btnForgot () {
       // console.log(this.formForgot)
       this.alertPopUp('info', '', 'This page is not yet available')
+      this.formForgot.email = ''
     },
     btnBack () {
       this.$router.push('/login')
@@ -59,6 +60,7 @@ section.box-body {
   height: 730px;
   background: #fff;
   margin: 80px 0;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
