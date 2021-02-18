@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
 import Chat from '../views/Chat.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
@@ -10,6 +11,12 @@ import Swal from 'sweetalert2'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: {auth: false}
+  },
   {
     path: '/chat/:room_id',
     name: 'Chat',

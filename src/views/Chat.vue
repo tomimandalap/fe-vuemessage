@@ -158,7 +158,7 @@
         </div>
       </div>
     </div>
-    <!-- chating -->
+    <!-- chating header -->
     <div v-if="to.length > 0" class="col-4 col-sm-5 col-md-6 col-lg-9">
       <div class="card-body bg-white box-header">
         <div class="container row">
@@ -180,27 +180,53 @@
           </div>
         </div>
       </div>
-      <div class="card-body box-chat">
-        <div v-for="(el, idx) in chat" :key="idx" class="row mt-4 mb-5">
-          <div class="col-1">
-            <img
-              class="img-profile-list"
-              :src="`${webURL}/image/${to_img}`"
-              :alt="{ to_img }"
-            />
+      <!-- chating body -->
+      <div v-if="chat.length > 0" class="card-body box-chat">
+        <div v-for="(el, idx) in chat" :key="idx" class="mt-4 mb-5">
+          <div v-if="el.from_name !== formUser.name" class="row">
+            <div class="col-1">
+              <img
+                class="img-profile-list"
+                :src="`${webURL}/image/${el.from_image}`"
+                :alt="{ to_img }"
+              />
+            </div>
+            <div class="col-5">
+              <p class="font-rubik f-normal cf-white bg-you">
+                {{ el.message }}
+              </p>
+              <small class="font-rubik f-normal font-weight-bold float-right">{{
+                el.date.substring(11, 16)
+              }}</small>
+            </div>
+            <div class="col-6"></div>
           </div>
-          <div class="col-5">
-            <p class="font-rubik f-normal cf-white bg-you">
-              {{ el.message }}
-            </p>
-            <small class="font-rubik f-normal font-weight-bold float-right">{{
-              el.date.substring(11, 16)
-            }}</small>
+          <div v-else class="row">
+            <div class="col-6"></div>
+            <div class="col-1">
+              <img
+                class="img-profile-list"
+                :src="`${webURL}/image/${el.from_image}`"
+                :alt="{ to_img }"
+              />
+            </div>
+            <div class="col-5">
+              <p class="font-rubik f-normal cf-white bg-you">
+                {{ el.message }}
+              </p>
+              <small class="font-rubik f-normal font-weight-bold float-right">{{
+                el.date.substring(11, 16)
+              }}</small>
+            </div>
           </div>
-          <div class="col-6">KITA</div>
         </div>
       </div>
-      <!-- footer chat -->
+      <div v-else class="card-body box-chat">
+        <p class="font-rubik colorLabel text-center t-blank">
+          Please select a chat to start messaging
+        </p>
+      </div>
+      <!-- chating footer -->
       <div class="card-footer bg-white box-footer">
         <div class="container row p-2">
           <div class="col-10">
@@ -300,6 +326,7 @@ export default {
     },
     resGetListChat () {
       this.socket.on('res-get-list-chat', (chat) => {
+        // console.log(chat)
         this.chat = chat
       })
     },

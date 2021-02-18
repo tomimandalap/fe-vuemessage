@@ -6,7 +6,8 @@
 body {
   background: #FAFAFA;
   /* background: #ccc; */
-  overflow: hidden;
+  overflow-x: hidden;
+  /* overflow: hidden; */
 }
 
 .tx-none:hover {
