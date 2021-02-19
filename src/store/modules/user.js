@@ -72,6 +72,7 @@ const modulUsers = {
       return new Promise((resolve, reject) => {
         axios.get(`${context.rootState.staticURL}/user/${context.state.id}`, { headers: { token: context.state.token } })
           .then((response) => {
+            // console.log(response.data.data)
             context.commit('setUserDetail', response.data.data)
             resolve(response.data.data)
           })

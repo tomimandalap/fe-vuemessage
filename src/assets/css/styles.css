@@ -26,6 +26,14 @@ body {
   font-size: 35px;
 }
 
+.f-title {
+  font-size: 18px;
+}
+
+.f-custom {
+  font-size: 16px;
+}
+
 .f-icon-chat {
   cursor: pointer;
   font-size: 20px;
@@ -112,6 +120,13 @@ input.inputBorder {
   cursor: pointer;
 }
 
+.img-profile-edit {
+  width: 60px;
+  height: 60px;
+  border: 1px solid#848484;
+  border-radius: 20px;
+}
+
 .img-profile-list {
   width: 60px;
   height: 60px;
@@ -133,4 +148,14 @@ input.inputBorder {
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.line {
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.pointer {
+  cursor: pointer;
 }

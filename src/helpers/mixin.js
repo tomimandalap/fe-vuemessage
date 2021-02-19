@@ -18,7 +18,11 @@ const mixins = {
       formUser: {
         name: '',
         email: '',
-        image: ''
+        image: '',
+        account: '',
+        biodata: '',
+        latitude: '',
+        longitude: ''
       },
       Toast: Swal.mixin({
         toast: true,

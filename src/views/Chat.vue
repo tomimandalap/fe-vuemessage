@@ -26,7 +26,7 @@
             <div class="col-12">
               <div v-if="detailUser.image === undefined">
                 <img
-                  @click="cProfile()"
+                  v-b-toggle.sidebar-1
                   class="img-profile"
                   :src="`${webURL}/image/default.png`"
                   alt="profile"
@@ -34,59 +34,12 @@
               </div>
               <div v-else>
                 <img
-                  @click="cProfile()"
+                  v-b-toggle.sidebar-1
                   class="img-profile"
                   :src="`${webURL}/image/${detailUser.image}`"
                   alt="profile"
                 />
               </div>
-              <!-- modal -->
-              <b-modal ref="my-modal" hide-footer title="Update Profile">
-                <div class="d-block text-left">
-                  <form action="" @submit.prevent="btnUpdate()">
-                    <label for="form-name" class="font-rubik colorLabel"
-                      >Name</label
-                    >
-                    <input
-                      v-model="formUser.name"
-                      class="font-rubik inputBorder p-1 w-100"
-                      type="text"
-                      placeholder="Name"
-                      id="form-name"
-                      required
-                    />
-                    <label for="form-email" class="font-rubik colorLabel mt-3"
-                      >Email</label
-                    >
-                    <input
-                      v-model="formUser.email"
-                      class="font-rubik inputBorder p-1 w-100"
-                      type="email"
-                      placeholder="Email"
-                      id="form-email"
-                      required
-                    />
-                    <input
-                      @change="processFile($event)"
-                      class="font-rubik mt-3 p-1 w-100"
-                      type="file"
-                    />
-                    <button
-                      type="submit"
-                      class="btn-custom cf-white font-rubik w-100 p-2 mt-4"
-                    >
-                      Update
-                    </button>
-                  </form>
-                </div>
-                <button
-                  @click="btnCancel()"
-                  class="btn-outcustom font-rubik w-100 p-2 mt-4"
-                >
-                  Cancel
-                </button>
-              </b-modal>
-              <!-- end modal -->
             </div>
             <div class="col-12 font-rubik">
               <h5 class="font-weight-bolder mt-4">{{ formUser.name }}</h5>
@@ -95,12 +48,251 @@
               <p class="f-normal colorLabel">{{ formUser.email }}</p>
             </div>
           </div>
+          <!-- side bar -->
+          <b-sidebar id="sidebar-1" title="Profile" shadow bg-variant="white">
+            <template #default="{ hide }">
+              <div class="container">
+                <!-- title -->
+                <div class="row">
+                  <div class="col-1">
+                    <span @click="hide" class="arrow-back f-title"
+                      ><i class="fas fa-chevron-left"></i
+                    ></span>
+                  </div>
+                  <div class="col-10 font-rubik text-center">
+                    <p class="f-title cf-second">{{ formUser.email }}</p>
+                  </div>
+                </div>
+                <!-- profile -->
+                <div class="row text-center">
+                  <div class="col-12">
+                    <div v-if="detailUser.image === undefined">
+                      <img
+                        class="img-profile-edit"
+                        :src="`${webURL}/image/default.png`"
+                        alt="profile"
+                      />
+                    </div>
+                    <div v-else>
+                      <img
+                        class="img-profile-edit"
+                        :src="`${webURL}/image/${detailUser.image}`"
+                        alt="profile"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <small
+                      v-b-toggle.sidebar-2
+                      class="font-rubik pointer cf-second"
+                      >Edit Profile</small
+                    >
+                  </div>
+                  <div class="col-12 font-rubik">
+                    <h5 class="font-weight-bolder mt-1">
+                      {{ formUser.name }}
+                    </h5>
+                  </div>
+                  <div class="col-12 font-rubik">
+                    <p class="f-normal colorLabel">{{ formUser.email }}</p>
+                  </div>
+                </div>
+                <!-- account -->
+                <div class="row font-rubik text-left">
+                  <div class="col-12">
+                    <h5 class="f-custom font-weight-bolder">Account</h5>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <h6 class="f-normal">{{ formUser.account }}</h6>
+                  </div>
+                  <div class="col-12">
+                    <small class="cf-second">Tap to change phone number</small>
+                  </div>
+                </div>
+                <!-- username -->
+                <div class="row line mt-3">
+                  <div class="col-12 font-rubik mt-2">
+                    <p class="f-normal font-weight-bold">
+                      {{ formUser.email }}
+                    </p>
+                  </div>
+                  <div class="col-12 font-rubik mt-n3 mb-n2">
+                    <p class="f-normal colorLabel">username</p>
+                  </div>
+                </div>
+                <!-- biodata -->
+                <div class="row mt-3">
+                  <div class="col-12">
+                    <p class="f-normal font-weight-bold">
+                      {{ formUser.biodata }}
+                    </p>
+                  </div>
+                  <div class="col-12 font-rubik mt-n2">
+                    <p class="f-normal colorLabel">Bio</p>
+                  </div>
+                </div>
+                <!-- setting -->
+                <div class="row mt-1">
+                  <div class="col-12">
+                    <p class="f-custom font-weight-bold">Settings</p>
+                  </div>
+                  <div class="col-1">
+                    <span class="font-rubik f-title"
+                      ><i class="far fa-bell"></i
+                    ></span>
+                  </div>
+                  <div class="col-10">
+                    <p class="f-normal font-rubik">Notification and Sounds</p>
+                  </div>
+                  <div class="col-1">
+                    <span class="font-rubik f-title"
+                      ><i class="fas fa-unlock-alt"></i
+                    ></span>
+                  </div>
+                  <div class="col-10">
+                    <p class="f-normal font-rubik">Privaty and Security</p>
+                  </div>
+                  <div class="col-1">
+                    <span class="font-rubik f-title"
+                      ><i class="fas fa-chart-line"></i
+                    ></span>
+                  </div>
+                  <div class="col-10">
+                    <p class="f-normal font-rubik">Data and Stronge</p>
+                  </div>
+                  <div class="col-1">
+                    <span class="font-rubik f-title"
+                      ><i class="far fa-file-alt"></i
+                    ></span>
+                  </div>
+                  <div class="col-10">
+                    <p class="f-normal font-rubik">Chat settings</p>
+                  </div>
+                  <div class="col-1">
+                    <span class="font-rubik f-title"
+                      ><i class="far fa-square"></i
+                    ></span>
+                  </div>
+                  <div class="col-10">
+                    <p class="f-normal font-rubik">Devices</p>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </b-sidebar>
+          <!-- sidebar edit -->
+          <b-sidebar id="sidebar-2" shadow bg-variant="white">
+            <template #default="{ hide }">
+              <div class="container">
+                <div class="row">
+                  <div class="col-1">
+                    <span @click="hide" class="arrow-back f-title"
+                      ><i class="fas fa-chevron-left"></i
+                    ></span>
+                  </div>
+                  <div class="col-10 font-rubik text-center">
+                    <p class="f-title cf-second">Edit Profile</p>
+                  </div>
+                </div>
+                <form action="" @submit.prevent="btnUpdate()">
+                  <label for="form-name" class="font-rubik colorLabel"
+                    >Name</label
+                  >
+                  <input
+                    v-model="formUser.name"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="text"
+                    placeholder="Name"
+                    id="form-name"
+                    required
+                  />
+                  <label for="form-email" class="font-rubik colorLabel mt-3"
+                    >Email</label
+                  >
+                  <input
+                    v-model="formUser.email"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="email"
+                    placeholder="Email"
+                    id="form-email"
+                    required
+                  />
+                  <label for="form-account" class="font-rubik colorLabel mt-3"
+                    >Phone number</label
+                  >
+                  <input
+                    v-model="formUser.account"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="text"
+                    placeholder="(+62)"
+                    id="form-account"
+                    required
+                  />
+                  <label for="form-biodata" class="font-rubik colorLabel mt-3"
+                    >Biodata</label
+                  >
+                  <input
+                    v-model="formUser.biodata"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="text"
+                    placeholder="Biodata"
+                    id="form-biodata"
+                    required
+                  />
+                  <label for="form-lat" class="font-rubik colorLabel mt-3"
+                    >Latitude</label
+                  >
+                  <input
+                    v-model="formUser.latitude"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="text"
+                    placeholder="-5.45"
+                    id="form-lat"
+                    required
+                  />
+                  <label for="form-long" class="font-rubik colorLabel mt-3"
+                    >Longitude</label
+                  >
+                  <input
+                    v-model="formUser.longitude"
+                    class="font-rubik inputBorder p-1 w-100"
+                    type="text"
+                    placeholder="105.267"
+                    id="form-long"
+                    required
+                  />
+                  <label for="form-foto" class="font-rubik colorLabel mt-3"
+                    >Image</label
+                  >
+                  <input
+                    @change="processFile($event)"
+                    class="font-rubik mt-1 p-1 w-100"
+                    type="file"
+                    id="form-foto"
+                  />
+                  <button
+                    @click="hide"
+                    type="submit"
+                    class="btn-custom cf-white font-rubik w-100 p-2 mt-4"
+                  >
+                    Update
+                  </button>
+                </form>
+                <button
+                  @click="btnCancel()"
+                  class="btn-outcustom font-rubik w-100 p-2 mt-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </template>
+          </b-sidebar>
           <!-- search -->
           <div class="row mt-4">
             <div class="col-10 input-group-prepend">
               <span
                 @click="btnSearch()"
-                class="bg-second border-style colorLabel p-2 pl-3"
+                class="bg-second border-style colorLabel pointer p-2 pl-3"
                 ><i class="fas fa-search"></i
               ></span>
               <input
@@ -111,11 +303,50 @@
               />
             </div>
             <div class="col-2">
-              <span @click="btnPlus()" class="cf-second float-right mt-2"
+              <span
+                v-b-toggle.addFriends
+                class="cf-second float-right pointer mt-2"
                 ><i class="fas fa-plus"></i
               ></span>
             </div>
           </div>
+          <!-- sidebar add friends -->
+          <b-sidebar id="addFriends" title="" shadow bg-variant="white">
+            <template #default="{ hide }">
+              <div class="container">
+                <div class="row">
+                  <div class="col-1">
+                    <span @click="hide" class="arrow-back f-title"
+                      ><i class="fas fa-chevron-left"></i
+                    ></span>
+                  </div>
+                  <div class="col-10 font-rubik text-center">
+                    <p class="f-title font-weight-bold cf-second">Add Friend</p>
+                  </div>
+                </div>
+                <!-- friend list -->
+                <div v-for="(e, i) in users" :key="i" class="row line mb-2">
+                  <div class="col-3 mt-1">
+                    <img
+                      class="img-profile-list"
+                      :src="`${webURL}/image/${e.image}`"
+                      alt="profile"
+                    />
+                  </div>
+                  <div class="col-6 mt-4 font-rubik">
+                    <p class="f-custom font-weight-bold">{{ e.name }}</p>
+                  </div>
+                  <div class="col-3 mt-3 font-rubik text-right">
+                    <span
+                      @click="getAddFriend(e)"
+                      class="f-title cf-second float-right pointer mt-2"
+                      ><i class="fas fa-user-plus"></i
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </b-sidebar>
           <!-- sort -->
           <div class="row font-rubik font-weight-bold mt-4">
             <div class="col-3">
@@ -164,7 +395,8 @@
         <div class="container row">
           <div class="col-1">
             <img
-              class="img-profile-list"
+              v-b-toggle.sidebar-right
+              class="img-profile-list pointer"
               :src="`${webURL}/image/${to_img}`"
               :alt="{ to_img }"
             />
@@ -180,6 +412,60 @@
           </div>
         </div>
       </div>
+      <!-- sidebar detail friend -->
+      <b-sidebar id="sidebar-right" right shadow bg-variant="white">
+        <template #default="{ hide }">
+          <div class="container">
+            <div class="row">
+              <div class="col-1">
+                <span @click="hide" class="arrow-back f-title"
+                  ><i class="fas fa-chevron-left"></i
+                ></span>
+              </div>
+              <div class="col-10 font-rubik text-center">
+                <p class="f-title cf-second">{{ detail.email }}</p>
+              </div>
+            </div>
+            <!-- picture detail -->
+            <div class="row text-center mt-3">
+              <div class="col-12">
+                <div v-if="detail.image === undefined">
+                  <img
+                    class="img-profile-edit"
+                    :src="`${webURL}/image/default.png`"
+                    alt="profile"
+                  />
+                </div>
+                <div v-else>
+                  <img
+                    class="img-profile-edit"
+                    :src="`${webURL}/image/${detail.image}`"
+                    alt="profile"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- names and status detail -->
+            <div class="row font-rubik text-left mt-3">
+              <div class="col-12">
+                <h5 class="f-custom font-weight-bolder">{{ detail.name }}</h5>
+              </div>
+              <div class="col-12 mt-2 mt-n1">
+                <h6 class="f-normal">online</h6>
+              </div>
+            </div>
+            <!-- phone number detail -->
+            <div class="row font-rubik text-left mt-3">
+              <div class="col-12">
+                <h5 class="f-custom font-weight-bolder">Phone number</h5>
+              </div>
+              <div class="col-12 mt-2">
+                <h6 class="f-normal">{{ detail.account }}</h6>
+              </div>
+            </div>
+          </div>
+        </template>
+      </b-sidebar>
       <!-- chating body -->
       <div v-if="chat.length > 0" class="card-body box-chat">
         <div v-for="(el, idx) in chat" :key="idx" class="mt-4 mb-5">
@@ -188,7 +474,7 @@
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${el.from_image}`"
-                :alt="{ to_img }"
+                :alt="`${el.from_image}`"
               />
             </div>
             <div class="col-5">
@@ -207,7 +493,7 @@
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${el.from_image}`"
-                :alt="{ to_img }"
+                :alt="`${el.from_image}`"
               />
             </div>
             <div class="col-5">
@@ -277,7 +563,8 @@ export default {
       to_id: '',
       to_img: '',
       chat: [],
-      msg: ''
+      msg: '',
+      detail: {}
     }
   },
   computed: {
@@ -312,12 +599,17 @@ export default {
             name: e.name,
             room_id: e.room_id,
             image: e.image,
-            status: e.status
+            email: e.email,
+            status: e.status,
+            account: e.account,
+            biodata: e.biodata
           })
         })
       })
     },
     getListChat (data) {
+      // set event click for send detail data
+      this.detail = data
       this.from = this.idUser
       this.to = data.name
       this.to_img = data.image
@@ -326,7 +618,6 @@ export default {
     },
     resGetListChat () {
       this.socket.on('res-get-list-chat', (chat) => {
-        // console.log(chat)
         this.chat = chat
       })
     },
@@ -338,6 +629,9 @@ export default {
       }
       this.socket.emit('send-message', data)
       this.msg = ''
+    },
+    getAddFriend (data) {
+      console.log(data)
     },
     addChat () {
       alert('add Items chat')
@@ -351,9 +645,6 @@ export default {
     btnMenuBar () {
       this.state = !this.state
     },
-    cProfile () {
-      this.$refs['my-modal'].show()
-    },
     processFile (el) {
       this.formUser.image = el.target.files[0]
     },
@@ -364,9 +655,12 @@ export default {
       fd.append('name', this.formUser.name)
       fd.append('email', this.formUser.email)
       fd.append('image', this.formUser.image)
+      fd.append('account', this.formUser.account)
+      fd.append('biodata', this.formUser.biodata)
+      fd.append('latitude', this.formUser.latitude)
+      fd.append('longitude', this.formUser.longitude)
       // console.log(fd)
       this.updateUser(fd).then((response) => {
-        this.$refs['my-modal'].hide()
         if (response == 'Please select an image to upload') {
           this.swalLoadingClose()
           this.alertModif('warning', 'Please select an image to upload!')
@@ -387,11 +681,14 @@ export default {
       })
     },
     btnCancel () {
-      this.$refs['my-modal'].hide()
       this.actionDetailUser().then((response) => {
         this.formUser.name = response.name
         this.formUser.email = response.email
         this.formUser.image = response.image
+        this.formUser.account = response.account
+        this.formUser.biodata = response.biodata
+        this.formUser.latitude = response.latitude
+        this.formUser.longitude = response.longitude
       })
     },
     signout () {
@@ -405,9 +702,6 @@ export default {
     },
     btnSearch () {
       this.alertModif('info', 'SEARCH')
-    },
-    btnPlus () {
-      this.alertModif('info', 'Plus')
     }
   },
   mounted () {
@@ -419,11 +713,21 @@ export default {
       this.formUser.name = response.name
       this.formUser.email = response.email
       this.formUser.image = response.image
+      this.formUser.account = response.account
+      this.formUser.biodata = response.biodata
+      this.formUser.latitude = response.latitude
+      this.formUser.longitude = response.longitude
+      // console.log(response)
     })
   }
 }
 </script>
 <style scoped>
+span.arrow-back {
+  color: #2675ec;
+  cursor: pointer;
+}
+
 div.cs-card {
   width: 100%;
   height: 78vh;
