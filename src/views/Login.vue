@@ -74,7 +74,7 @@ export default {
       loginUsers: 'users/loginUsers'
     }),
     btnLogin () {
-      // this.swalLoading('Login')
+      this.swalLoading('Login')
       this.loginUsers(this.formLogin).then((response) => {
         // console.log(response)
         if (response.msg === 'Email not found!') {

@@ -899,7 +899,7 @@ export default {
   data () {
     return {
       state: true,
-      socket: io('http://localhost:4000'),
+      socket: io('http://52.204.186.223:4000'),
       users: [],
       from: '',
       to: '',
@@ -1050,7 +1050,6 @@ export default {
     },
     btnUpdate () {
       // console.log(this.formUser)
-      this.swalLoading('Update')
       const fd = new FormData()
       fd.append('name', this.formUser.name)
       fd.append('email', this.formUser.email)
@@ -1060,7 +1059,9 @@ export default {
       fd.append('latitude', this.formUser.latitude)
       fd.append('longitude', this.formUser.longitude)
       // console.log(fd)
+      this.swalLoading('Update')
       this.updateUser(fd).then((response) => {
+        this.swalLoadingClose()
         if (response == 'Please select an image to upload') {
           this.swalLoadingClose()
           this.alertModif('warning', 'Please select an image to upload!')
