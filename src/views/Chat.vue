@@ -10,7 +10,28 @@
                 Telegram
               </h6>
             </div>
-            <div class="col-6">
+            <!-- web version -->
+            <div class="col-6 web">
+              <span
+                @click="broadcast()"
+                v-show="state === true"
+                class="checkout cf-second fl-mobile ml-3 mr-3"
+              >
+                <i class="fas fa-bullhorn"></i>
+              </span>
+              <span
+                v-show="state === true"
+                @click="signout()"
+                class="checkout cf-second"
+                ><i class="fas fa-sign-out-alt"></i
+              ></span>
+              <!-- @click="btnMenuBar()" -->
+              <span v-b-toggle.sidebar-1 class="cf-second float-right bt-bars"
+                ><i class="fas fa-bars"></i
+              ></span>
+            </div>
+            <!-- mobile version -->
+            <div class="col-6 mobile text-right">
               <span
                 @click="broadcast()"
                 v-show="state === true"
@@ -21,7 +42,7 @@
               <span
                 v-show="state === true"
                 @click="signout()"
-                class="checkout cf-second"
+                class="checkout cf-second mr-4"
                 ><i class="fas fa-sign-out-alt"></i
               ></span>
               <!-- @click="btnMenuBar()" -->
@@ -429,28 +450,64 @@
             </div>
           </div>
         </div>
-        <!-- conten -->
-        <div class="card-body cs-card">
+        <!-- conten web -->
+        <div class="card-body cs-card web">
           <div
             v-for="(e, i) in users"
             :key="i"
             class="row box-list mb-2"
             @click="getListChat(e)"
           >
-            <div class="col-sm-3 col-md-3 col-lg-3 mt-2">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 mt-2">
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${e.image}`"
                 alt="profile"
               />
             </div>
-            <div class="col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left">
+            <div
+              class="col-5 col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left"
+            >
               <p class="f-normal font-weight-bold">{{ e.name }}</p>
               <p class="f-normal font-font-weight-normal cf-second mt-n2">
                 Hai?
               </p>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right">
+            <div
+              class="col-4 col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right"
+            >
+              <p class="colorLabel f-normal">4:20</p>
+              <p class="notif cf-white mt-n3 float-right">10</p>
+            </div>
+          </div>
+        </div>
+        <!-- conten mobile -->
+        <div class="card-body cs-card mobile">
+          <div
+            v-b-toggle.display-chating
+            v-for="(e, i) in users"
+            :key="i"
+            class="row box-list mb-2"
+            @click="getListChat(e)"
+          >
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 mt-2">
+              <img
+                class="img-profile-list"
+                :src="`${webURL}/image/${e.image}`"
+                alt="profile"
+              />
+            </div>
+            <div
+              class="col-5 col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left"
+            >
+              <p class="f-normal font-weight-bold">{{ e.name }}</p>
+              <p class="f-normal font-font-weight-normal cf-second mt-n2">
+                Hai?
+              </p>
+            </div>
+            <div
+              class="col-4 col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right"
+            >
               <p class="colorLabel f-normal">4:20</p>
               <p class="notif cf-white mt-n3 float-right">10</p>
             </div>
@@ -458,8 +515,202 @@
         </div>
       </div>
     </div>
-    <!-- chating header -->
-    <div v-if="to.length > 0" class="col-sm-7 col-md-8 col-lg-9">
+    <!-- sidebar chat mobile -->
+    <b-sidebar
+      id="display-chating"
+      title="Chat"
+      shadow
+      width="100%"
+      bg-variant="white"
+    >
+      <template #default="{ hide }">
+        <div v-if="to.length > 0" class="col-12 mobile">
+          <div class="card-body bg-white box-header">
+            <div class="container row">
+              <div class="col-1 mt-3">
+                <span @click="hide" class="arrow-back f-title"
+                  ><i class="fas fa-chevron-left"></i
+                ></span>
+              </div>
+              <div class="col-3">
+                <img
+                  v-b-toggle.sidebar-right
+                  class="img-profile-list pointer"
+                  :src="`${webURL}/image/${to_img}`"
+                  :alt="{ to_img }"
+                />
+              </div>
+              <div class="col-7 text-left font-rubik">
+                <p class="font-weight-bolder mt-2">{{ to }}</p>
+                <p class="f-size cf-second mt-n2">Online</p>
+              </div>
+            </div>
+          </div>
+          <!-- sidebar detail friend mobile -->
+          <b-sidebar
+            id="sidebar-right"
+            right
+            shadow
+            width="100%"
+            bg-variant="white"
+          >
+            <template #default="{ hide }">
+              <div class="container">
+                <div class="row">
+                  <div class="col-1">
+                    <span @click="hide" class="arrow-back f-title"
+                      ><i class="fas fa-chevron-left"></i
+                    ></span>
+                  </div>
+                  <div class="col-10 font-rubik text-center">
+                    <p class="f-title cf-second">{{ detail.email }}</p>
+                  </div>
+                </div>
+                <!-- picture detail -->
+                <div class="row text-center mt-3">
+                  <div class="col-12">
+                    <div v-if="detail.image === undefined">
+                      <img
+                        class="img-profile-edit"
+                        :src="`${webURL}/image/default.png`"
+                        alt="profile"
+                      />
+                    </div>
+                    <div v-else>
+                      <img
+                        class="img-profile-edit"
+                        :src="`${webURL}/image/${detail.image}`"
+                        alt="profile"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- names and status detail -->
+                <div class="row font-rubik text-left mt-3">
+                  <div class="col-12">
+                    <h5 class="f-custom font-weight-bolder">
+                      {{ detail.name }}
+                    </h5>
+                  </div>
+                  <div class="col-12 mt-2 mt-n1">
+                    <h6 class="f-normal">online</h6>
+                  </div>
+                </div>
+                <!-- phone number detail -->
+                <div class="row font-rubik text-left mt-3">
+                  <div class="col-12">
+                    <h5 class="f-custom font-weight-bolder">Phone number</h5>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <h6 class="f-normal">{{ detail.account }}</h6>
+                  </div>
+                </div>
+                <div class="row text-left font-rubik mt-3">
+                  <div class="col-12">
+                    <h5 class="f-custom font-weight-bolder">Location</h5>
+                  </div>
+                  <div class="col-12">
+                    <GoogleMapMaps
+                      :center="{ lat: detail.latitude, lng: detail.longitude }"
+                      :zoom="15"
+                      map-type-id="terrain"
+                      style="width: 330px; height: 200px"
+                    >
+                      <GoogleMapMarker
+                        :position="{
+                          lat: detail.latitude,
+                          lng: detail.longitude,
+                        }"
+                      ></GoogleMapMarker>
+                    </GoogleMapMaps>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </b-sidebar>
+          <!-- chating body mobile -->
+          <div
+            v-if="chat.length > 0"
+            class="card-body box-chat bg-second-m ml-n2"
+          >
+            <div v-for="(el, idx) in chat" :key="idx" class="mt-1 mb-3">
+              <div v-if="el.from_name !== formUser.name" class="row">
+                <div class="col-3">
+                  <img
+                    class="img-profile-list"
+                    :src="`${webURL}/image/${el.from_image}`"
+                    :alt="`${el.from_image}`"
+                  />
+                </div>
+                <div class="col-9">
+                  <p class="font-rubik f-size cf-white bg-you">
+                    {{ el.message }}
+                  </p>
+                  <small
+                    class="font-rubik f-size font-weight-bold float-right"
+                    >{{ el.date.substring(11, 16) }}</small
+                  >
+                </div>
+              </div>
+              <div v-else class="row">
+                <div class="col-9">
+                  <p class="font-rubik f-size cf-white bg-you">
+                    {{ el.message }}
+                  </p>
+                  <small
+                    class="font-rubik f-size font-weight-bold float-left"
+                    >{{ el.date.substring(11, 16) }}</small
+                  >
+                </div>
+                <div class="col-3">
+                  <img
+                    class="img-profile-list"
+                    :src="`${webURL}/image/${el.from_image}`"
+                    :alt="`${el.from_image}`"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-else class="card-body box-chat bg-second-m ml-n2">
+            <p class="font-rubik colorLabel text-center t-blank">
+              Please select a chat to start messaging
+            </p>
+          </div>
+          <!-- chating footer -->
+          <div class="card-footer bg-white box-footer">
+            <div class="container row p-2">
+              <div class="col-8">
+                <form action="" @submit.prevent="sendChat()">
+                  <input
+                    v-model="msg"
+                    class="font-rubik f-normal bg-custom border-custom p-2 w-100"
+                    type="text"
+                    placeholder="Type your message"
+                  />
+                </form>
+              </div>
+              <div
+                class="col-4 bg-custom border-custom text-center cf-second p-1"
+              >
+                <span @click="addChat()" class="f-normal"
+                  ><i class="fas fa-plus"></i
+                ></span>
+                <span @click="addEmot()" class="f-normal ml-3 mr-3"
+                  ><i class="fas fa-surprise"></i
+                ></span>
+                <span @click="addImage()" class="f-normal"
+                  ><i class="fas fa-camera"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </b-sidebar>
+    <!-- ===== -->
+    <!-- chating header web -->
+    <div v-if="to.length > 0" class="col-sm-7 col-md-8 col-lg-9 web">
       <div class="card-body bg-white box-header">
         <div class="container row">
           <div class="col-sm-3 col-md-2 col-lg-1">
@@ -544,7 +795,10 @@
                   style="width: 300px; height: 200px"
                 >
                   <GoogleMapMarker
-                    :position="{ lat: detail.latitude, lng: detail.longitude }"
+                    :position="{
+                      lat: detail.latitude,
+                      lng: detail.longitude,
+                    }"
                   ></GoogleMapMarker>
                 </GoogleMapMaps>
               </div>
@@ -627,7 +881,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="col-sm-7 col-md-8 col-lg-9 overflow-auto">
+    <div v-else class="col-sm-7 col-md-8 col-lg-9 web overflow-auto">
       <p class="font-rubik colorLabel text-center t-blank">
         Please select a chat to start messaging
       </p>
@@ -890,7 +1144,7 @@ div.card {
 }
 
 div.cs-card {
-  height: 480px;
+  height: 498px;
   /* overflow-x: hidden !important; */
   /* overflow: scroll; */
 }
@@ -936,5 +1190,39 @@ div.box-chat {
 div.box-footer {
   height: 5rem;
   margin-left: -1.9em;
+}
+
+@media (min-width: 577px) {
+  div.mobile {
+    background: olive;
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  div.card {
+    width: 104%;
+    overflow: hidden;
+  }
+
+  div.web {
+    display: none;
+  }
+
+  div.box-header {
+    height: 6rem;
+    width: 115%;
+  }
+
+  div.box-footer {
+    height: 5rem;
+    width: 115%;
+  }
+
+  div.box-chat {
+    height: 438px;
+    overflow-x: hidden !important;
+    overflow: scroll;
+  }
 }
 </style>

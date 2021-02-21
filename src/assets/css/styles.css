@@ -63,6 +63,11 @@ body {
   background: #FAFAFA;
 }
 
+.bg-second-m {
+  width: 100%;
+  background: #FAFAFA;
+}
+
 .bg-custom {
   background: #eee;
 }
