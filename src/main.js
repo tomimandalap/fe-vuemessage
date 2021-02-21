@@ -6,8 +6,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './assets/css/styles.css'
 import store from './store/index'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCRPF7T8UmkIVPZHbHngBsXsdwb1DTfr9Y'
+  }
+})
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 

@@ -1,28 +1,73 @@
 <template>
   <div class="row">
-    <div class="col-8 col-sm-7 col-md-6 col-lg-3">
+    <div class="col-sm-5 col-md-4 col-lg-3">
       <div class="card border-none">
-        <div class="card-header border-none bg-white">
+        <div class="card-header border-none bg-white mb-n3">
+          <!-- header -->
           <div class="row mt-2">
             <div class="col-6">
               <h6 class="font-rubik cf-second font-weight-bold mt-1">
-                Vue Message
+                Telegram
               </h6>
             </div>
             <div class="col-6">
               <span
+                @click="broadcast()"
+                v-show="state === true"
+                class="checkout cf-second ml-3 mr-3"
+              >
+                <i class="fas fa-bullhorn"></i>
+              </span>
+              <span
                 v-show="state === true"
                 @click="signout()"
-                class="checkout cf-second ml-5"
+                class="checkout cf-second"
                 ><i class="fas fa-sign-out-alt"></i
               ></span>
-              <span @click="btnMenuBar()" class="cf-second float-right bt-bars"
+              <!-- @click="btnMenuBar()" -->
+              <span v-b-toggle.sidebar-1 class="cf-second float-right bt-bars"
                 ><i class="fas fa-bars"></i
               ></span>
             </div>
           </div>
+          <!-- modal broadcast -->
+          <b-modal ref="my-modal" hide-footer title="Broadcast">
+            <div class="row font-rubik text-left">
+              <div class="col-12">
+                <!-- <h5 class="f-title colorLabel">Message</h5> -->
+                <label for="form-broadcast" class="f-title colorLabel"
+                  >Message</label
+                >
+              </div>
+              <div class="col-12">
+                <form action="" @submit.prevent="sendBroadcast()">
+                  <textarea
+                    v-model="msgBroadcast"
+                    name=""
+                    id="form-broadcast"
+                    cols="50"
+                    rows="5"
+                    placeholder="Send message"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="btn-custom cf-white font-rubik w-100 p-2 mt-4"
+                  >
+                    Send Broadcast
+                  </button>
+                </form>
+              </div>
+            </div>
+            <button
+              @click="closeBroadcast()"
+              type="submit"
+              class="btn-outcustom font-rubik w-100 p-2 mt-3 mb-3"
+            >
+              Cancel
+            </button>
+          </b-modal>
           <!-- profile -->
-          <div v-show="state === true" class="row text-center mt-4">
+          <!-- <div v-show="state === true" class="row text-center mt-4">
             <div class="col-12">
               <div v-if="detailUser.image === undefined">
                 <img
@@ -47,7 +92,7 @@
             <div class="col-12 font-rubik">
               <p class="f-normal colorLabel">{{ formUser.email }}</p>
             </div>
-          </div>
+          </div> -->
           <!-- side bar -->
           <b-sidebar id="sidebar-1" title="Profile" shadow bg-variant="white">
             <template #default="{ hide }">
@@ -270,6 +315,29 @@
                     type="file"
                     id="form-foto"
                   />
+                  <div class="row text-left font-rubik mt-3">
+                    <div class="col-12">
+                      <h5 class="f-custom font-weight-bolder">Location</h5>
+                    </div>
+                    <div class="col-12">
+                      <GoogleMapMaps
+                        :center="{
+                          lat: formUser.latitude,
+                          lng: formUser.longitude,
+                        }"
+                        :zoom="15"
+                        map-type-id="terrain"
+                        style="width: 275px; height: 200px"
+                      >
+                        <GoogleMapMarker
+                          :position="{
+                            lat: formUser.latitude,
+                            lng: formUser.longitude,
+                          }"
+                        ></GoogleMapMarker>
+                      </GoogleMapMaps>
+                    </div>
+                  </div>
                   <button
                     @click="hide"
                     type="submit"
@@ -280,7 +348,7 @@
                 </form>
                 <button
                   @click="btnCancel()"
-                  class="btn-outcustom font-rubik w-100 p-2 mt-2"
+                  class="btn-outcustom font-rubik w-100 p-2 mt-2 mb-5"
                 >
                   Cancel
                 </button>
@@ -348,15 +416,16 @@
             </template>
           </b-sidebar>
           <!-- sort -->
-          <div class="row font-rubik font-weight-bold mt-4">
+          <div class="row font-rubik text-center font-weight-bold mt-4">
             <div class="col-3">
-              <span class="f-normal">All</span>
+              <span class="f-size">All</span>
             </div>
             <div class="col-5">
-              <span class="f-normal aciteve">Important</span>
+              <span class="f-size active">Important</span>
             </div>
+            <!-- aciteve -->
             <div class="col-4">
-              <span class="f-normal">Unread</span>
+              <span class="f-size">Unread</span>
             </div>
           </div>
         </div>
@@ -368,32 +437,32 @@
             class="row box-list mb-2"
             @click="getListChat(e)"
           >
-            <div class="col-3 mt-2">
+            <div class="col-sm-3 col-md-3 col-lg-3 mt-2">
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${e.image}`"
                 alt="profile"
               />
             </div>
-            <div class="col-6 mt-3 font-rubik">
+            <div class="col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left">
               <p class="f-normal font-weight-bold">{{ e.name }}</p>
               <p class="f-normal font-font-weight-normal cf-second mt-n2">
-                Hai, apa kabar?
+                Hai?
               </p>
             </div>
-            <div class="col-3 mt-3 font-rubik text-right">
-              <p class="colorLabel">15:20</p>
-              <p class="notif cf-white mt-n3 float-right">09</p>
+            <div class="col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right">
+              <p class="colorLabel f-normal">4:20</p>
+              <p class="notif cf-white mt-n3 float-right">10</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- chating header -->
-    <div v-if="to.length > 0" class="col-4 col-sm-5 col-md-6 col-lg-9">
+    <div v-if="to.length > 0" class="col-sm-7 col-md-8 col-lg-9">
       <div class="card-body bg-white box-header">
         <div class="container row">
-          <div class="col-1">
+          <div class="col-sm-3 col-md-2 col-lg-1">
             <img
               v-b-toggle.sidebar-right
               class="img-profile-list pointer"
@@ -401,13 +470,13 @@
               :alt="{ to_img }"
             />
           </div>
-          <div class="col-9 text-left font-rubik">
+          <div class="col-sm-7 col-md-8 col-lg-9 text-left font-rubik">
             <p class="font-weight-bolder mt-2">{{ to }}</p>
             <p class="f-size cf-second mt-n2">Online</p>
           </div>
-          <div class="col-2 text-right">
+          <div class="col-sm-2 col-md-2 col-lg-2 text-right">
             <span class="cf-second f-icon"
-              ><i class="fas fa-th-large"></i
+              ><i class="fas fa-grip-horizontal"></i
             ></span>
           </div>
         </div>
@@ -463,6 +532,23 @@
                 <h6 class="f-normal">{{ detail.account }}</h6>
               </div>
             </div>
+            <div class="row text-left font-rubik mt-3">
+              <div class="col-12">
+                <h5 class="f-custom font-weight-bolder">Location</h5>
+              </div>
+              <div class="col-12">
+                <GoogleMapMaps
+                  :center="{ lat: detail.latitude, lng: detail.longitude }"
+                  :zoom="15"
+                  map-type-id="terrain"
+                  style="width: 300px; height: 200px"
+                >
+                  <GoogleMapMarker
+                    :position="{ lat: detail.latitude, lng: detail.longitude }"
+                  ></GoogleMapMarker>
+                </GoogleMapMaps>
+              </div>
+            </div>
           </div>
         </template>
       </b-sidebar>
@@ -470,14 +556,14 @@
       <div v-if="chat.length > 0" class="card-body box-chat">
         <div v-for="(el, idx) in chat" :key="idx" class="mt-4 mb-5">
           <div v-if="el.from_name !== formUser.name" class="row">
-            <div class="col-1">
+            <div class="col-sm-3 col-md-2 col-lg-1">
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${el.from_image}`"
                 :alt="`${el.from_image}`"
               />
             </div>
-            <div class="col-5">
+            <div class="col-sm-9 col-md-5 col-lg-5">
               <p class="font-rubik f-normal cf-white bg-you">
                 {{ el.message }}
               </p>
@@ -485,24 +571,24 @@
                 el.date.substring(11, 16)
               }}</small>
             </div>
-            <div class="col-6"></div>
+            <div class="col-md-5 col-lg-6"></div>
           </div>
           <div v-else class="row">
-            <div class="col-6"></div>
-            <div class="col-1">
+            <div class="col-md-5 col-lg-6"></div>
+            <div class="col-sm-9 col-md-5 col-lg-5">
+              <p class="font-rubik f-normal cf-white bg-you">
+                {{ el.message }}
+              </p>
+              <small class="font-rubik f-normal font-weight-bold float-left">{{
+                el.date.substring(11, 16)
+              }}</small>
+            </div>
+            <div class="col-sm-3 col-md-2 col-lg-1">
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${el.from_image}`"
                 :alt="`${el.from_image}`"
               />
-            </div>
-            <div class="col-5">
-              <p class="font-rubik f-normal cf-white bg-you">
-                {{ el.message }}
-              </p>
-              <small class="font-rubik f-normal font-weight-bold float-right">{{
-                el.date.substring(11, 16)
-              }}</small>
             </div>
           </div>
         </div>
@@ -515,7 +601,7 @@
       <!-- chating footer -->
       <div class="card-footer bg-white box-footer">
         <div class="container row p-2">
-          <div class="col-10">
+          <div class="col-sm-8 col-md-9 col-lg-10">
             <form action="" @submit.prevent="sendChat()">
               <input
                 v-model="msg"
@@ -525,7 +611,9 @@
               />
             </form>
           </div>
-          <div class="col-2 bg-custom border-custom text-center cf-second p-1">
+          <div
+            class="col-sm-4 col-md-3 col-lg-2 bg-custom border-custom text-center cf-second p-1"
+          >
             <span @click="addChat()" class="f-icon-chat"
               ><i class="fas fa-plus"></i
             ></span>
@@ -539,7 +627,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="col-4 col-sm-5 col-md-6 col-lg-9 overflow-auto">
+    <div v-else class="col-sm-7 col-md-8 col-lg-9 overflow-auto">
       <p class="font-rubik colorLabel text-center t-blank">
         Please select a chat to start messaging
       </p>
@@ -551,11 +639,12 @@
 import io from 'socket.io-client'
 import { mapGetters, mapActions } from 'vuex'
 import mixins from '../helpers/mixin'
+import * as VueGoogleMaps from 'vue2-google-maps'
 export default {
   mixins: [mixins],
   data () {
     return {
-      state: false,
+      state: true,
       socket: io('http://localhost:4000'),
       users: [],
       from: '',
@@ -564,8 +653,15 @@ export default {
       to_img: '',
       chat: [],
       msg: '',
-      detail: {}
+      detail: {},
+      msgBroadcast: '',
+      listBroadcast: [],
+      listFriend: []
     }
+  },
+  components: {
+    GoogleMapMaps: VueGoogleMaps.Map,
+    GoogleMapMarker: VueGoogleMaps.Marker
   },
   computed: {
     ...mapGetters({
@@ -602,13 +698,14 @@ export default {
             email: e.email,
             status: e.status,
             account: e.account,
-            biodata: e.biodata
+            biodata: e.biodata,
+            latitude: e.latitude,
+            longitude: e.longitude
           })
         })
       })
     },
     getListChat (data) {
-      // set event click for send detail data
       this.detail = data
       this.from = this.idUser
       this.to = data.name
@@ -630,21 +727,70 @@ export default {
       this.socket.emit('send-message', data)
       this.msg = ''
     },
+    broadcast () {
+      this.$refs['my-modal'].show()
+    },
+    sendBroadcast () {
+      const sendData = {
+        from: this.idUser,
+        msg: this.msgBroadcast
+      }
+      this.socket.emit('send-broadcast', sendData)
+      this.$refs['my-modal'].hide()
+      this.msgBroadcast = ''
+    },
+    // responBroadcast () {
+    //   socket.on('res-broadcast', (data) => {
+    //     this.listBroadcast = [...this.listBroadcast, data]
+    //   })
+    // },
+    closeBroadcast () {
+      this.$refs['my-modal'].hide()
+      this.msgBroadcast = ''
+    },
     getAddFriend (data) {
-      console.log(data)
+      const sts = 1
+      const newData = {
+        room_id : this.RoomID,
+        from_id: this.idUser,
+        to_id: data.id,
+        status: sts,
+        name: data.name,
+        email: data.email,
+        account: data.account,
+        image: data.image,
+        biodata: data.biodata,
+        latitude: data.latitude,
+        longitude: data.longitude
+      }
+      // console.log(newData)
+      this.socket.emit('get-friendship', newData)
+    },
+    resAddFriend () {
+      this.socket.on('res-friendship', (data) => {
+        console.log(data)
+      })
+    },
+    getListDB () {
+      this.socket.emit('get-list-db', this.RoomID)
+    },
+    resListDB () {
+      this.socket.on('res-list-db', (data) => {
+        this.listFriend = data
+      })
     },
     addChat () {
-      alert('add Items chat')
+      this.alertModif('info', 'Feature not available')
     },
     addEmot () {
-      alert('add Emot')
+      this.alertModif('info', 'The emoticon feature is not available')
     },
     addImage () {
-      alert('add Images')
+      this.alertModif('info', 'Camera feature not available')
     },
-    btnMenuBar () {
-      this.state = !this.state
-    },
+    // btnMenuBar () {
+    //   this.state = !this.state
+    // },
     processFile (el) {
       this.formUser.image = el.target.files[0]
     },
@@ -672,8 +818,16 @@ export default {
           this.alertModif('warning', 'Oops, maximum size 1 Mb')
         } else {
           this.swalLoadingClose()
-          this.actionDetailUser()
           this.alertModif('success', response)
+          this.actionDetailUser().then((response) => {
+            this.formUser.name = response.name
+            this.formUser.email = response.email
+            this.formUser.image = response.image
+            this.formUser.account = response.account
+            this.formUser.biodata = response.biodata
+            this.formUser.latitude = response.latitude
+            this.formUser.longitude = response.longitude
+          })
         }
       }).catch((err) => {
         this.swalLoadingClose()
@@ -709,6 +863,9 @@ export default {
     this.getListUsers()
     this.resGetListUsers()
     this.resGetListChat()
+    this.resAddFriend()
+    this.getListDB()
+    this.resListDB()
     this.actionDetailUser().then((response) => {
       this.formUser.name = response.name
       this.formUser.email = response.email
@@ -728,11 +885,14 @@ span.arrow-back {
   cursor: pointer;
 }
 
-div.cs-card {
+div.card {
   width: 100%;
-  height: 78vh;
-  /* overflow-x: hidden !important;
-  overflow: scroll; */
+}
+
+div.cs-card {
+  height: 480px;
+  /* overflow-x: hidden !important; */
+  /* overflow: scroll; */
 }
 
 span.bt-bars {
@@ -745,19 +905,15 @@ span.checkout {
   cursor: pointer;
 }
 
-.f-normal {
-  font-size: 14px;
-}
-
-span.aciteve {
-  padding: 8px 10px;
+span.active {
+  padding: 6px 2px;
   color: #fff;
   background: #7e98df;
   border: none;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 div.box-list {
@@ -772,7 +928,7 @@ div.box-header {
 }
 
 div.box-chat {
-  height: 77vh;
+  height: 480px;
   overflow-x: hidden !important;
   overflow: scroll;
 }
