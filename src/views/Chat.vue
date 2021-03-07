@@ -87,33 +87,6 @@
               Cancel
             </button>
           </b-modal>
-          <!-- profile -->
-          <!-- <div v-show="state === true" class="row text-center mt-4">
-            <div class="col-12">
-              <div v-if="detailUser.image === undefined">
-                <img
-                  v-b-toggle.sidebar-1
-                  class="img-profile"
-                  :src="`${webURL}/image/default.png`"
-                  alt="profile"
-                />
-              </div>
-              <div v-else>
-                <img
-                  v-b-toggle.sidebar-1
-                  class="img-profile"
-                  :src="`${webURL}/image/${detailUser.image}`"
-                  alt="profile"
-                />
-              </div>
-            </div>
-            <div class="col-12 font-rubik">
-              <h5 class="font-weight-bolder mt-4">{{ formUser.name }}</h5>
-            </div>
-            <div class="col-12 font-rubik">
-              <p class="f-normal colorLabel">{{ formUser.email }}</p>
-            </div>
-          </div> -->
           <!-- side bar -->
           <b-sidebar id="sidebar-1" title="Profile" shadow bg-variant="white">
             <template #default="{ hide }">
@@ -195,6 +168,30 @@
                   </div>
                   <div class="col-12 font-rubik mt-n2">
                     <p class="f-normal colorLabel">Bio</p>
+                  </div>
+                </div>
+                <!-- maps -->
+                <div class="row mt-3 mb-5">
+                  <div class="col-12">
+                    <h5 class="f-custom font-weight-bolder">Location</h5>
+                  </div>
+                  <div class="col-12">
+                    <GoogleMapMaps
+                      :center="{
+                        lat: formUser.latitude,
+                        lng: formUser.longitude,
+                      }"
+                      :zoom="15"
+                      map-type-id="terrain"
+                      style="width: 275px; height: 200px"
+                    >
+                      <GoogleMapMarker
+                        :position="{
+                          lat: formUser.latitude,
+                          lng: formUser.longitude,
+                        }"
+                      ></GoogleMapMarker>
+                    </GoogleMapMaps>
                   </div>
                 </div>
                 <!-- setting -->
@@ -336,29 +333,6 @@
                     type="file"
                     id="form-foto"
                   />
-                  <div class="row text-left font-rubik mt-3">
-                    <div class="col-12">
-                      <h5 class="f-custom font-weight-bolder">Location</h5>
-                    </div>
-                    <div class="col-12">
-                      <GoogleMapMaps
-                        :center="{
-                          lat: formUser.latitude,
-                          lng: formUser.longitude,
-                        }"
-                        :zoom="15"
-                        map-type-id="terrain"
-                        style="width: 275px; height: 200px"
-                      >
-                        <GoogleMapMarker
-                          :position="{
-                            lat: formUser.latitude,
-                            lng: formUser.longitude,
-                          }"
-                        ></GoogleMapMarker>
-                      </GoogleMapMaps>
-                    </div>
-                  </div>
                   <button
                     @click="hide"
                     type="submit"
@@ -469,9 +443,7 @@
               class="col-5 col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left"
             >
               <p class="f-normal font-weight-bold">{{ e.name }}</p>
-              <p class="f-normal font-font-weight-normal cf-second mt-n2">
-                Hai?
-              </p>
+              <p class="f-normal font-weight-normal cf-second mt-n2">Hai</p>
             </div>
             <div
               class="col-4 col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right"
@@ -635,25 +607,14 @@
           >
             <div v-for="(el, idx) in chat" :key="idx" class="mt-1 mb-3">
               <div v-if="el.from_name !== formUser.name" class="row">
-                <div class="col-3">
+                <!-- <div class="col-3">
                   <img
                     class="img-profile-list"
                     :src="`${webURL}/image/${el.from_image}`"
                     :alt="`${el.from_image}`"
                   />
-                </div>
-                <div class="col-9">
-                  <p class="font-rubik f-size cf-white bg-you">
-                    {{ el.message }}
-                  </p>
-                  <small
-                    class="font-rubik f-size font-weight-bold float-right"
-                    >{{ el.date.substring(11, 16) }}</small
-                  >
-                </div>
-              </div>
-              <div v-else class="row">
-                <div class="col-9">
+                </div> -->
+                <div class="col-12">
                   <p class="font-rubik f-size cf-white bg-you">
                     {{ el.message }}
                   </p>
@@ -662,13 +623,24 @@
                     >{{ el.date.substring(11, 16) }}</small
                   >
                 </div>
-                <div class="col-3">
+              </div>
+              <div v-else class="row">
+                <div class="col-12">
+                  <p class="font-rubik f-size cf-black bg-me text-right">
+                    {{ el.message }}
+                  </p>
+                  <small
+                    class="font-rubik f-size font-weight-bold float-right"
+                    >{{ el.date.substring(11, 16) }}</small
+                  >
+                </div>
+                <!-- <div class="col-3">
                   <img
                     class="img-profile-list"
                     :src="`${webURL}/image/${el.from_image}`"
                     :alt="`${el.from_image}`"
                   />
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -830,7 +802,7 @@
           <div v-else class="row">
             <div class="col-md-5 col-lg-6"></div>
             <div class="col-sm-9 col-md-5 col-lg-5">
-              <p class="font-rubik f-normal cf-white bg-you">
+              <p class="font-rubik f-normal cf-black bg-me">
                 {{ el.message }}
               </p>
               <small class="font-rubik f-normal font-weight-bold float-left">{{
@@ -894,6 +866,7 @@ import io from 'socket.io-client'
 import { mapGetters, mapActions } from 'vuex'
 import mixins from '../helpers/mixin'
 import * as VueGoogleMaps from 'vue2-google-maps'
+// import coMObile from '../components/Mobile'
 export default {
   mixins: [mixins],
   data () {
@@ -906,6 +879,7 @@ export default {
       to_id: '',
       to_img: '',
       chat: [],
+      chatReverse: [],
       msg: '',
       detail: {},
       msgBroadcast: '',
@@ -916,6 +890,7 @@ export default {
   components: {
     GoogleMapMaps: VueGoogleMaps.Map,
     GoogleMapMarker: VueGoogleMaps.Marker
+    // coMObile
   },
   computed: {
     ...mapGetters({
