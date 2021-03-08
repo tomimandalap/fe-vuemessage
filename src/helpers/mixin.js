@@ -63,6 +63,9 @@ const mixins = {
     },
     swalLoadingClose () {
       Swal.close()
+    },
+    dotMsg (value) {
+      return value.substring(0,6)+'...'
     }
   }
 }

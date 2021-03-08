@@ -443,13 +443,44 @@
               class="col-5 col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left"
             >
               <p class="f-normal font-weight-bold">{{ e.name }}</p>
-              <p class="f-normal font-weight-normal cf-second mt-n2">Hai</p>
+              <div v-for="(el, ind) in newArr" :key="ind">
+                <div v-if="el === 'null'">
+                  <!-- <p class="f-normal font-weight-normal cf-second mt-n2">...</p> -->
+                </div>
+                <div v-else>
+                  <p
+                    v-if="
+                      (el.from_id == idUser && el.to_id == e.id) ||
+                      (el.from_id == e.id && el.to_id == idUser)
+                    "
+                    class="f-normal font-weight-normal cf-second mt-n2"
+                  >
+                    {{ dotMsg(el.message) }}
+                  </p>
+                </div>
+              </div>
             </div>
             <div
               class="col-4 col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right"
             >
-              <p class="colorLabel f-normal">4:20</p>
-              <p class="notif cf-white mt-n3 float-right">10</p>
+              <!-- <p class="colorLabel f-normal">4:20</p> -->
+              <!-- <p class="notif cf-white mt-n3 float-right">10</p> -->
+              <div v-for="(el, ind) in newArr" :key="ind">
+                <div v-if="el === 'null'">
+                  <!-- <p class="f-normal font-weight-normal cf-second mt-n2">...</p> -->
+                </div>
+                <div v-else>
+                  <p
+                    v-if="
+                      (el.from_id == idUser && el.to_id == e.id) ||
+                      (el.from_id == e.id && el.to_id == idUser)
+                    "
+                    class="colorLabel f-normal"
+                  >
+                    {{ el.date.substring(11, 16) }}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -473,15 +504,44 @@
               class="col-5 col-sm-5 col-md-5 col-lg-5 mt-3 font-rubik float-left"
             >
               <p class="f-normal font-weight-bold">{{ e.name }}</p>
-              <p class="f-normal font-font-weight-normal cf-second mt-n2">
-                Hai?
-              </p>
+              <div v-for="(el, ind) in newArr" :key="ind">
+                <div v-if="el === 'null'">
+                  <!-- <p class="f-normal font-weight-normal cf-second mt-n2">...</p> -->
+                </div>
+                <div v-else>
+                  <p
+                    v-if="
+                      (el.from_id == idUser && el.to_id == e.id) ||
+                      (el.from_id == e.id && el.to_id == idUser)
+                    "
+                    class="f-normal font-weight-normal cf-second mt-n2"
+                  >
+                    {{ dotMsg(el.message) }}
+                  </p>
+                </div>
+              </div>
             </div>
             <div
               class="col-4 col-sm-4 col-md-4 col-lg-4 mt-3 font-rubik text-right"
             >
-              <p class="colorLabel f-normal">4:20</p>
-              <p class="notif cf-white mt-n3 float-right">10</p>
+              <!-- <p class="colorLabel f-normal">4:20</p> -->
+              <!-- <p class="notif cf-white mt-n3 float-right">10</p> -->
+              <div v-for="(el, ind) in newArr" :key="ind">
+                <div v-if="el === 'null'">
+                  <!-- <p class="f-normal font-weight-normal cf-second mt-n2">...</p> -->
+                </div>
+                <div v-else>
+                  <p
+                    v-if="
+                      (el.from_id == idUser && el.to_id == e.id) ||
+                      (el.from_id == e.id && el.to_id == idUser)
+                    "
+                    class="colorLabel f-normal"
+                  >
+                    {{ el.date.substring(11, 16) }}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -497,7 +557,7 @@
     >
       <template #default="{ hide }">
         <div v-if="to.length > 0" class="col-12 mobile">
-          <div class="card-body bg-white box-header">
+          <div class="card-body bg-white box-header b-border">
             <div class="container row">
               <div class="col-1 mt-3">
                 <span @click="hide" class="arrow-back f-title"
@@ -614,25 +674,23 @@
                     :alt="`${el.from_image}`"
                   />
                 </div> -->
-                <div class="col-12">
-                  <p class="font-rubik f-size cf-white bg-you">
-                    {{ el.message }}
-                  </p>
-                  <small
-                    class="font-rubik f-size font-weight-bold float-left"
-                    >{{ el.date.substring(11, 16) }}</small
+                <div class="col-12 mb-3">
+                  <span class="font-rubik f-normal cf-white balon-you"
+                    >{{ el.message }}
+                    <small class="font-rubik ml-2">{{
+                      el.date.substring(11, 16)
+                    }}</small></span
                   >
                 </div>
               </div>
-              <div v-else class="row">
-                <div class="col-12">
-                  <p class="font-rubik f-size cf-black bg-me text-right">
+              <div v-else class="row text-right">
+                <div class="col-12 mb-3">
+                  <span class="font-rubik f-normal cf-black balon-me"
+                    ><small class="font-rubik mr-2">{{
+                      el.date.substring(11, 16)
+                    }}</small>
                     {{ el.message }}
-                  </p>
-                  <small
-                    class="font-rubik f-size font-weight-bold float-right"
-                    >{{ el.date.substring(11, 16) }}</small
-                  >
+                  </span>
                 </div>
                 <!-- <div class="col-3">
                   <img
@@ -650,7 +708,7 @@
             </p>
           </div>
           <!-- chating footer -->
-          <div class="card-footer bg-white box-footer">
+          <div class="card-footer bg-white box-footer t-border">
             <div class="container row p-2">
               <div class="col-8">
                 <form action="" @submit.prevent="sendChat()">
@@ -789,27 +847,39 @@
                 :alt="`${el.from_image}`"
               />
             </div>
-            <div class="col-sm-9 col-md-5 col-lg-5">
-              <p class="font-rubik f-normal cf-white bg-you">
+            <div class="col-sm-9 col-md-5 col-lg-5 mt-2">
+              <!-- <p class="font-rubik f-normal cf-white bg-you">
                 {{ el.message }}
-              </p>
-              <small class="font-rubik f-normal font-weight-bold float-right">{{
+              </p> -->
+              <span class="font-rubik f-normal cf-white balon-you"
+                >{{ el.message }}
+                <small class="font-rubik ml-2">{{
+                  el.date.substring(11, 16)
+                }}</small></span
+              >
+              <!-- <small class="font-rubik f-normal font-weight-bold float-right">{{
                 el.date.substring(11, 16)
-              }}</small>
+              }}</small> -->
             </div>
             <div class="col-md-5 col-lg-6"></div>
           </div>
           <div v-else class="row">
-            <div class="col-md-5 col-lg-6"></div>
-            <div class="col-sm-9 col-md-5 col-lg-5">
-              <p class="font-rubik f-normal cf-black bg-me">
+            <div class="col-md-5 col-lg-5"></div>
+            <div class="col-sm-9 col-md-5 col-lg-5 text-right mt-3">
+              <!-- <p class="font-rubik f-normal cf-black bg-me">
                 {{ el.message }}
-              </p>
-              <small class="font-rubik f-normal font-weight-bold float-left">{{
+              </p> -->
+              <span class="font-rubik f-normal cf-black balon-me"
+                ><small class="font-rubik mr-2">{{
+                  el.date.substring(11, 16)
+                }}</small>
+                {{ el.message }}
+              </span>
+              <!-- <small class="font-rubik f-normal font-weight-bold float-left">{{
                 el.date.substring(11, 16)
-              }}</small>
+              }}</small> -->
             </div>
-            <div class="col-sm-3 col-md-2 col-lg-1">
+            <div class="col-sm-3 col-md-2 col-lg-2">
               <img
                 class="img-profile-list"
                 :src="`${webURL}/image/${el.from_image}`"
@@ -872,7 +942,7 @@ export default {
   data () {
     return {
       state: true,
-      socket: io('http://52.204.186.223:4000'),
+      socket: io('http://localhost:4000'),
       users: [],
       from: '',
       to: '',
@@ -884,7 +954,8 @@ export default {
       detail: {},
       msgBroadcast: '',
       listBroadcast: [],
-      listFriend: []
+      listFriend: [],
+      newArr: []
     }
   },
   components: {
@@ -918,6 +989,7 @@ export default {
     },
     resGetListUsers () {
       this.socket.on('res-get-list-users', (users) => {
+        // console.log(users)
         users.forEach((e) => {
           this.users.push({
             id: e.id,
@@ -932,6 +1004,19 @@ export default {
             longitude: e.longitude
           })
         })
+        users.map((el) => {
+          const data = {
+            room_id: this.RoomID,
+            from_id: Number(this.idUser),
+            to_id: el.id
+          }
+          this.socket.emit('get-data-end', data)
+        })
+      })
+    },
+    resDataEnd () {
+      this.socket.on('res-data-end', (data) => {
+        this.newArr = [...this.newArr, data]
       })
     },
     getListChat (data) {
@@ -954,6 +1039,9 @@ export default {
         msg: this.msg
       }
       this.socket.emit('send-message', data)
+      // this.getListUsers()
+      // this.resGetListUsers()
+      // this.resDataEnd() //get ulang message dan jam terbarunya
       this.msg = ''
     },
     broadcast () {
@@ -1092,6 +1180,7 @@ export default {
     this.joinRoom()
     this.getListUsers()
     this.resGetListUsers()
+    this.resDataEnd()
     this.resGetListChat()
     this.resAddFriend()
     this.getListDB()

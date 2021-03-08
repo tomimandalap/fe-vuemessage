@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card-body cs-card mobile">
     <div
       v-b-toggle.display-chating
       v-for="(e, i) in users"

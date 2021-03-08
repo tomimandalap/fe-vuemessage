@@ -88,6 +88,22 @@ body {
   text-align: justify;
 }
 
+.balon-you {
+  background: #7E98DF;
+  padding: 15px 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.balon-me {
+  background: #F0F0F0;
+  padding: 15px 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .border-none {
   border: none;
 }
@@ -177,4 +193,12 @@ input.inputBorder {
 
 .pointer {
   cursor: pointer;
+}
+
+.t-border {
+  border-top: 1px solid #ccc;
+}
+
+.b-border {
+  border-bottom: 1px solid #ccc;
 }
