@@ -942,7 +942,7 @@ export default {
   data () {
     return {
       state: true,
-      socket: io('http://localhost:4000'),
+      socket: io('http://52.204.186.223:4000'),
       users: [],
       from: '',
       to: '',
