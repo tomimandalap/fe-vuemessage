@@ -10,7 +10,7 @@ Project membuat website chating dan realtime maps seperti aplikasi telegram yang
 - [Sweetalert2](https://www.npmjs.com/package/sweetalert2)
 
 ## Deploy
-Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/)
+Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/login)
 
 ---
 
