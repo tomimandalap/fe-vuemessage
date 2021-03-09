@@ -7,7 +7,7 @@ Project membuat website chating dan realtime maps seperti aplikasi telegram yang
 - [Axios](https://www.npmjs.com/package/axios)
 - [Vuex](https://www.npmjs.com/package/vuex)
 - [Bootstrap-vue](https://www.npmjs.com/package/bootstrap-vue)
-- 
+- [Sweetalert2](https://www.npmjs.com/package/sweetalert2)
 
 ## Deploy
 Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/)
