@@ -1,7 +1,18 @@
 # femaprealtime
 
-Project membuat website chating dan realtime maps. Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/). Materi presentasi [disini](https://drive.google.com/file/d/16F388kNIJV5xtcl2Pe2nBc3W6W2kaTca/view?usp=sharing).
+Project membuat website chating dan realtime maps seperti aplikasi telegram yang dapat diguanakan untuk personal chating dan melihat lokasi secara realtime. Materi presentasi [disini](https://drive.google.com/file/d/16F388kNIJV5xtcl2Pe2nBc3W6W2kaTca/view?usp=sharing).
 
+### Dependencies
+- [Socket.IO](https://www.npmjs.com/package/socket.io)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Vuex](https://www.npmjs.com/package/vuex)
+- [Bootstrap-vue](https://www.npmjs.com/package/bootstrap-vue)
+- 
+
+## Deploy
+Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/)
+
+---
 
 ## Project setup
 
