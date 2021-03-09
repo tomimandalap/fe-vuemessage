@@ -46,6 +46,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Personal Chating
 ![Capture3](https://user-images.githubusercontent.com/43200304/110453802-2a4f8a80-80f9-11eb-92cd-9dcc9f11da13.PNG)
 
+### Profile & Location (Me)
+![Capture4](https://user-images.githubusercontent.com/43200304/110453805-2ae82100-80f9-11eb-9c57-2ebbe8b5c11f.PNG)
+
+### Edit Profile
+![Capture5](https://user-images.githubusercontent.com/43200304/110453806-2b80b780-80f9-11eb-9434-93df21c169ea.PNG)
+
+### Info & Location (Friend)
+![Capture6](https://user-images.githubusercontent.com/43200304/110453811-2c194e00-80f9-11eb-8cb7-281f1ab991e4.PNG)
+
 ---
 
 ## Backend
