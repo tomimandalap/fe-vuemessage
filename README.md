@@ -39,13 +39,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ## Hasil Web Chating
-![t1](https://user-images.githubusercontent.com/43200304/108646806-a63ab780-74e9-11eb-9908-228247e3e2ef.PNG)
 
-![t2](https://user-images.githubusercontent.com/43200304/108646809-a89d1180-74e9-11eb-8a0a-7df1d6b47907.PNG)
+### Register
+![capture1](https://user-images.githubusercontent.com/43200304/110453798-2885c700-80f9-11eb-8101-dfdc264d8e76.PNG)
 
-![t3](https://user-images.githubusercontent.com/43200304/108646811-a935a800-74e9-11eb-85a4-7fb61311cdca.PNG)
-
-![t4](https://user-images.githubusercontent.com/43200304/108646813-aa66d500-74e9-11eb-8b70-a5bc61e2397b.PNG)
+### Personal Chating
+![Capture3](https://user-images.githubusercontent.com/43200304/110453802-2a4f8a80-80f9-11eb-92cd-9dcc9f11da13.PNG)
 
 ---
 
