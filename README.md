@@ -10,9 +10,6 @@ Project membuat website chating dan realtime maps seperti aplikasi telegram yang
 - [Sweetalert2](https://www.npmjs.com/package/sweetalert2)
 - [vue2-google-maps](https://www.npmjs.com/package/vue2-google-maps)
 
-## Deploy
-Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/login)
-
 ---
 
 ## Project setup
@@ -71,3 +68,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Backend
 Silahkan klik link berikut [ini](https://github.com/tomimandalap/be-vuemessage)
+
+## Deploy
+Hasil dari project ini dapat dilihat [disini](http://52.204.186.223:35685/login)
